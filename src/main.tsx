@@ -1,11 +1,13 @@
+import { QueryClientProvider } from "@tanstack/react-query";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
-import { StrictMode } from "react";
+import { StrictMode, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
 
 import "./App.css";
+import { queryClient } from "./queryClient.ts";
 import reportWebVitals from "./reportWebVitals.ts";
 import "./styles.css";
 
@@ -28,11 +30,17 @@ declare module "@tanstack/react-router" {
 
 // Render the app
 const rootElement = document.getElementById("app");
+const body = document.getElementsByTagName("body")[0];
+// body?.classList.add("dark");
 if (rootElement && !rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <StrictMode>
-      <RouterProvider router={router} />
+      <QueryClientProvider client={queryClient}>
+        <Suspense fallback={<div>Loading..</div>}>
+          <RouterProvider router={router} />
+        </Suspense>
+      </QueryClientProvider>
     </StrictMode>
   );
 }

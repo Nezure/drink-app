@@ -18,7 +18,7 @@ export function Header() {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link className="text-xl font-extralight" to={"/"}>
-              Drinkelino
+              Name of app
             </Link>
           </div>
 
@@ -63,6 +63,7 @@ export function Header() {
       <div className={`${isMenuOpen ? "block" : "hidden"} md:hidden`}>
         <div className="space-y-1 px-4 pb-3 pt-2">
           <Link
+            activeProps={{ className: "bg-amber-700/50" }}
             to={"/"}
             className="block rounded-md px-3 py-2 text-base font-medium"
             onClick={() => setIsMenuOpen(false)}
@@ -70,8 +71,9 @@ export function Header() {
             Home
           </Link>
           <Link
+            activeProps={{ className: "bg-amber-700/50" }}
             to={"/create"}
-            className="block rounded-md px-3 py-2 text-base font-medium"
+            className="block rounded-md px-3 py-2  text-base font-medium"
             onClick={() => setIsMenuOpen(false)}
           >
             Create drink
