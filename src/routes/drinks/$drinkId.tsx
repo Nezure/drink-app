@@ -60,7 +60,10 @@ function RouteComponent() {
             />
           </div>
           <div className="flex gap-4 flex-wrap lg:flex-nowrap md:gap-6">
-            <div className="w-full lg:w-1/2">
+            <div className="w-full lg:w-1/2 bg-card border rounded-md border-border p-4 flex flex-col gap-2">
+              <span className="text-primary-foreground text-lg font-semibold">
+                Ingredients
+              </span>
               <TableAdvanced
                 itemsPerPage={10}
                 pagination
@@ -69,7 +72,7 @@ function RouteComponent() {
               ></TableAdvanced>
             </div>
             <div className="bg-card w-full lg:w-1/2 flex flex-col gap-2 md:p-4 border-border border rounded-md border-solid p-2">
-              <span className="text-primary-foreground text-lg">
+              <span className="text-primary-foreground text-lg font-semibold">
                 Instructions
               </span>
               <div>
