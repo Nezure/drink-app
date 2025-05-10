@@ -1,1 +1,0 @@
-import{j as s}from"./index-8RCPb-YK.js";function i({header:a,children:e,className:x,...l}){return s.jsx("div",{className:`md:pl-64 max-w-max ${x}`,...l,children:s.jsxs("div",{className:"p-4 md:p-6 flex flex-col flex-wrap gap-4",children:[s.jsx("div",{className:"text-3xl ",children:a}),s.jsx("div",{className:"mt-2",children:e})]})})}export{i as P};
