@@ -6,10 +6,10 @@ import { FlexibleCard } from "./ui/flexible-card";
 export function DrinkCardList({ drinks }: { drinks: Drink[] }) {
   const { navigate } = useRouter();
   return (
-    <div className="flex gap-2 p-2  flex-wrap">
+    <div className="flex gap-4 flex-wrap">
       {drinks.map((drink, index) => (
         <FlexibleCard
-          className="w-full md:w-80"
+          className="w-full md:w-1/2"
           onClick={() => {
             navigate({ to: "/drinks/$drinkId", params: { drinkId: drink.id } });
           }}

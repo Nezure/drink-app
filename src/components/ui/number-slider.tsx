@@ -32,11 +32,11 @@ export default function NumberSlider({
   };
 
   return (
-    <div className={`w-full max-w-md mx-auto p-2 rounded-md ${className}`}>
+    <div className={`w-full mx-auto p-2 rounded-md ${className}`}>
       <div className="space-y-0">
         <div className="flex justify-between items-center">
-          <h3 className="text-base font-semibold">{label}</h3>
-          <div className="bg-accent text-accent-foreground rounded-full px-2 text-sm py-1 min-w-[3rem] text-center">
+          <h3 className=" text-base font-semibold">{label}</h3>
+          <div className="bg-accent text-accent-foreground rounded-full px-2 text-sm py-1 min-w-[30px] flex items-center justify-center min-h-[30px] text-center">
             {value}
           </div>
         </div>

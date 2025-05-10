@@ -30,7 +30,7 @@ export function FlexibleCard({
 }: FlexibleCardProps) {
   return (
     <Card
-      className={`overflow-hidden rounded-md border border-border bg-card text-card-foreground shadow-sm transition-all duration-200 hover:shadow-md ${onClick ? "cursor-pointer" : ""} ${className}`}
+      className={`overflow-hidden rounded-md border border-border bg-card text-card-foreground shadow-lg transition-all duration-200 hover:shadow-md ${onClick ? "cursor-pointer" : ""} ${className}`}
       onClick={onClick}
     >
       <div className="flex flex-col">

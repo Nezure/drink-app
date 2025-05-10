@@ -7,6 +7,7 @@ import ReactDOM from "react-dom/client";
 import { routeTree } from "./routeTree.gen";
 
 import "./App.css";
+import { ThemeProvider } from "./components/theme-provider.tsx";
 import { queryClient } from "./queryClient.ts";
 import reportWebVitals from "./reportWebVitals.ts";
 import "./styles.css";
@@ -30,16 +31,18 @@ declare module "@tanstack/react-router" {
 
 // Render the app
 const rootElement = document.getElementById("app");
-const body = document.getElementsByTagName("body")[0];
+// const body = document.getElementsByTagName("body")[0];
 // body?.classList.add("dark");
 if (rootElement && !rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <StrictMode>
       <QueryClientProvider client={queryClient}>
-        <Suspense fallback={<div>Loading..</div>}>
-          <RouterProvider router={router} />
-        </Suspense>
+        <ThemeProvider storageKey="vite-ui-theme" defaultTheme="dark">
+          <Suspense fallback={<div>Loading..</div>}>
+            <RouterProvider router={router} />
+          </Suspense>
+        </ThemeProvider>
       </QueryClientProvider>
     </StrictMode>
   );

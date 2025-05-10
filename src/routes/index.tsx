@@ -1,5 +1,6 @@
 import { drinksQueryOptions } from "@/api/queryOptions/drinksQueryOptions";
 import { DrinkCardList } from "@/components/drink-card-list";
+import { Page } from "@/components/Page";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import "../App.css";
@@ -12,8 +13,8 @@ function App() {
   const { data: drinks } = useQuery(drinksQueryOptions());
 
   return (
-    <div className="App bg-background">
+    <Page header={"Browse drinks"}>
       <DrinkCardList drinks={drinks || []} />
-    </div>
+    </Page>
   );
 }

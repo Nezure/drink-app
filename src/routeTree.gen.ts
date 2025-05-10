@@ -12,21 +12,15 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as TestImport } from './routes/test'
-import { Route as CreateImport } from './routes/create'
 import { Route as IndexImport } from './routes/index'
 import { Route as DrinksDrinkIdImport } from './routes/drinks/$drinkId'
+import { Route as DrinksCreateIndexImport } from './routes/drinks/create/index'
 
 // Create/Update Routes
 
 const TestRoute = TestImport.update({
   id: '/test',
   path: '/test',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const CreateRoute = CreateImport.update({
-  id: '/create',
-  path: '/create',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -42,6 +36,12 @@ const DrinksDrinkIdRoute = DrinksDrinkIdImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const DrinksCreateIndexRoute = DrinksCreateIndexImport.update({
+  id: '/drinks/create/',
+  path: '/drinks/create/',
+  getParentRoute: () => rootRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -51,13 +51,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/create': {
-      id: '/create'
-      path: '/create'
-      fullPath: '/create'
-      preLoaderRoute: typeof CreateImport
       parentRoute: typeof rootRoute
     }
     '/test': {
@@ -74,6 +67,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DrinksDrinkIdImport
       parentRoute: typeof rootRoute
     }
+    '/drinks/create/': {
+      id: '/drinks/create/'
+      path: '/drinks/create'
+      fullPath: '/drinks/create'
+      preLoaderRoute: typeof DrinksCreateIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -81,47 +81,47 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/create': typeof CreateRoute
   '/test': typeof TestRoute
   '/drinks/$drinkId': typeof DrinksDrinkIdRoute
+  '/drinks/create': typeof DrinksCreateIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/create': typeof CreateRoute
   '/test': typeof TestRoute
   '/drinks/$drinkId': typeof DrinksDrinkIdRoute
+  '/drinks/create': typeof DrinksCreateIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/create': typeof CreateRoute
   '/test': typeof TestRoute
   '/drinks/$drinkId': typeof DrinksDrinkIdRoute
+  '/drinks/create/': typeof DrinksCreateIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/create' | '/test' | '/drinks/$drinkId'
+  fullPaths: '/' | '/test' | '/drinks/$drinkId' | '/drinks/create'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/create' | '/test' | '/drinks/$drinkId'
-  id: '__root__' | '/' | '/create' | '/test' | '/drinks/$drinkId'
+  to: '/' | '/test' | '/drinks/$drinkId' | '/drinks/create'
+  id: '__root__' | '/' | '/test' | '/drinks/$drinkId' | '/drinks/create/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  CreateRoute: typeof CreateRoute
   TestRoute: typeof TestRoute
   DrinksDrinkIdRoute: typeof DrinksDrinkIdRoute
+  DrinksCreateIndexRoute: typeof DrinksCreateIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  CreateRoute: CreateRoute,
   TestRoute: TestRoute,
   DrinksDrinkIdRoute: DrinksDrinkIdRoute,
+  DrinksCreateIndexRoute: DrinksCreateIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -135,22 +135,22 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/create",
         "/test",
-        "/drinks/$drinkId"
+        "/drinks/$drinkId",
+        "/drinks/create/"
       ]
     },
     "/": {
       "filePath": "index.tsx"
-    },
-    "/create": {
-      "filePath": "create.tsx"
     },
     "/test": {
       "filePath": "test.tsx"
     },
     "/drinks/$drinkId": {
       "filePath": "drinks/$drinkId.tsx"
+    },
+    "/drinks/create/": {
+      "filePath": "drinks/create/index.tsx"
     }
   }
 }
