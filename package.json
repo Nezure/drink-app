@@ -1,7 +1,7 @@
 {
   "homepage": "http://nezure.github.io/drink-app",
-  "name": "sippable",
-  "version": "0.0.1",
+  "name": "drink-app",
+  "version": "0.1.0",
   "private": true,
   "type": "module",
   "scripts": {

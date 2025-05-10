@@ -1,10 +1,12 @@
 "use client";
 
+import { menuItems } from "@/utils/menu-items";
 import { Link } from "@tanstack/react-router";
 import { Menu, Moon, Sun, X } from "lucide-react";
 import { useState } from "react";
 import { useTheme } from "./theme-provider";
 import { Button } from "./ui/button";
+import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "./ui/sidebar";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -63,22 +65,23 @@ export function Header() {
       {/* Mobile Menu */}
       <div className={`${isMenuOpen ? "block" : "hidden"} md:hidden`}>
         <div className="space-y-1 px-4 pb-3 pt-2">
-          <Link
-            activeProps={{ className: "" }}
-            to={"/"}
-            className="block rounded-md px-3 py-2  text-base font-medium"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Home
-          </Link>
-          <Link
-            activeProps={{ className: "" }}
-            to={"/drinks/create"}
-            className="block rounded-md px-3 py-2  text-base font-medium"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Create drink
-          </Link>
+          <SidebarMenu>
+            {menuItems.map((item) => (
+              <SidebarMenuItem key={item.title}>
+                <SidebarMenuButton asChild>
+                  <Link
+                    activeProps={{
+                      className: "bg-primary text-primary-foreground",
+                    }}
+                    to={item.url}
+                  >
+                    <item.icon />
+                    <span>{item.title}</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            ))}
+          </SidebarMenu>
         </div>
       </div>
     </header>

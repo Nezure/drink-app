@@ -15,6 +15,7 @@ import { Route as TestImport } from './routes/test'
 import { Route as IndexImport } from './routes/index'
 import { Route as DrinksDrinkIdImport } from './routes/drinks/$drinkId'
 import { Route as DrinksCreateIndexImport } from './routes/drinks/create/index'
+import { Route as DrinksCreateDrinkIdImport } from './routes/drinks/create/$drinkId'
 
 // Create/Update Routes
 
@@ -39,6 +40,12 @@ const DrinksDrinkIdRoute = DrinksDrinkIdImport.update({
 const DrinksCreateIndexRoute = DrinksCreateIndexImport.update({
   id: '/drinks/create/',
   path: '/drinks/create/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DrinksCreateDrinkIdRoute = DrinksCreateDrinkIdImport.update({
+  id: '/drinks/create/$drinkId',
+  path: '/drinks/create/$drinkId',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -67,6 +74,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DrinksDrinkIdImport
       parentRoute: typeof rootRoute
     }
+    '/drinks/create/$drinkId': {
+      id: '/drinks/create/$drinkId'
+      path: '/drinks/create/$drinkId'
+      fullPath: '/drinks/create/$drinkId'
+      preLoaderRoute: typeof DrinksCreateDrinkIdImport
+      parentRoute: typeof rootRoute
+    }
     '/drinks/create/': {
       id: '/drinks/create/'
       path: '/drinks/create'
@@ -83,6 +97,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/test': typeof TestRoute
   '/drinks/$drinkId': typeof DrinksDrinkIdRoute
+  '/drinks/create/$drinkId': typeof DrinksCreateDrinkIdRoute
   '/drinks/create': typeof DrinksCreateIndexRoute
 }
 
@@ -90,6 +105,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/test': typeof TestRoute
   '/drinks/$drinkId': typeof DrinksDrinkIdRoute
+  '/drinks/create/$drinkId': typeof DrinksCreateDrinkIdRoute
   '/drinks/create': typeof DrinksCreateIndexRoute
 }
 
@@ -98,15 +114,32 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/test': typeof TestRoute
   '/drinks/$drinkId': typeof DrinksDrinkIdRoute
+  '/drinks/create/$drinkId': typeof DrinksCreateDrinkIdRoute
   '/drinks/create/': typeof DrinksCreateIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/test' | '/drinks/$drinkId' | '/drinks/create'
+  fullPaths:
+    | '/'
+    | '/test'
+    | '/drinks/$drinkId'
+    | '/drinks/create/$drinkId'
+    | '/drinks/create'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/test' | '/drinks/$drinkId' | '/drinks/create'
-  id: '__root__' | '/' | '/test' | '/drinks/$drinkId' | '/drinks/create/'
+  to:
+    | '/'
+    | '/test'
+    | '/drinks/$drinkId'
+    | '/drinks/create/$drinkId'
+    | '/drinks/create'
+  id:
+    | '__root__'
+    | '/'
+    | '/test'
+    | '/drinks/$drinkId'
+    | '/drinks/create/$drinkId'
+    | '/drinks/create/'
   fileRoutesById: FileRoutesById
 }
 
@@ -114,6 +147,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   TestRoute: typeof TestRoute
   DrinksDrinkIdRoute: typeof DrinksDrinkIdRoute
+  DrinksCreateDrinkIdRoute: typeof DrinksCreateDrinkIdRoute
   DrinksCreateIndexRoute: typeof DrinksCreateIndexRoute
 }
 
@@ -121,6 +155,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   TestRoute: TestRoute,
   DrinksDrinkIdRoute: DrinksDrinkIdRoute,
+  DrinksCreateDrinkIdRoute: DrinksCreateDrinkIdRoute,
   DrinksCreateIndexRoute: DrinksCreateIndexRoute,
 }
 
@@ -137,6 +172,7 @@ export const routeTree = rootRoute
         "/",
         "/test",
         "/drinks/$drinkId",
+        "/drinks/create/$drinkId",
         "/drinks/create/"
       ]
     },
@@ -148,6 +184,9 @@ export const routeTree = rootRoute
     },
     "/drinks/$drinkId": {
       "filePath": "drinks/$drinkId.tsx"
+    },
+    "/drinks/create/$drinkId": {
+      "filePath": "drinks/create/$drinkId.tsx"
     },
     "/drinks/create/": {
       "filePath": "drinks/create/index.tsx"
