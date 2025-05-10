@@ -1,15 +1,21 @@
 "use client";
 
 import { Link } from "@tanstack/react-router";
-import { Menu, X } from "lucide-react";
+import { Menu, Moon, Sun, X } from "lucide-react";
 import { useState } from "react";
+import { useTheme } from "./theme-provider";
+import { Button } from "./ui/button";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const themeProvider = useTheme();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const theme = themeProvider.theme;
+  const oppisitveTheme = theme === "dark" ? "light" : "dark";
 
   return (
     <header className="sticky top-0 z-50 w-full bg-sidebar text-sidebar-foreground shadow-sm  border-b border-solid border-sidebar-border">
@@ -18,43 +24,38 @@ export function Header() {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link className="text-xl font-extralight" to={"/"}>
-              Name of app
+              Sippable
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:block">
-            <ul className="flex space-x-8">
-              <li>
-                <Link to="/" className="hover:font-semibold">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link to="/create" className="hover:font-semibold">
-                  Home
-                </Link>
-              </li>
-            </ul>
-          </nav>
-
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <button
-              type="button"
-              className="inline-flex items-center justify-center rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-inset"
-              aria-expanded={isMenuOpen}
-              onClick={toggleMenu}
-            >
-              <span className="sr-only">
-                {isMenuOpen ? "Close menu" : "Open menu"}
-              </span>
-              {isMenuOpen ? (
-                <X className="h-6 w-6" aria-hidden="true" />
-              ) : (
-                <Menu className="h-6 w-6" aria-hidden="true" />
-              )}
-            </button>
+          <div className="flex items-center gap-2">
+            <div>
+              <Button
+                variant={"ghost"}
+                onClick={() => themeProvider.setTheme(oppisitveTheme)}
+                size={"icon"}
+              >
+                {theme === "dark" ? <Sun /> : <Moon />}
+              </Button>
+            </div>
+            <div className="md:hidden">
+              <button
+                type="button"
+                className="inline-flex items-center justify-center rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-inset"
+                aria-expanded={isMenuOpen}
+                onClick={toggleMenu}
+              >
+                <span className="sr-only">
+                  {isMenuOpen ? "Close menu" : "Open menu"}
+                </span>
+                {isMenuOpen ? (
+                  <X className="h-6 w-6" aria-hidden="true" />
+                ) : (
+                  <Menu className="h-6 w-6" aria-hidden="true" />
+                )}
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -63,16 +64,16 @@ export function Header() {
       <div className={`${isMenuOpen ? "block" : "hidden"} md:hidden`}>
         <div className="space-y-1 px-4 pb-3 pt-2">
           <Link
-            activeProps={{ className: "bg-amber-700/50" }}
+            activeProps={{ className: "" }}
             to={"/"}
-            className="block rounded-md px-3 py-2 text-base font-medium"
+            className="block rounded-md px-3 py-2  text-base font-medium"
             onClick={() => setIsMenuOpen(false)}
           >
             Home
           </Link>
           <Link
-            activeProps={{ className: "bg-amber-700/50" }}
-            to={"/create"}
+            activeProps={{ className: "" }}
+            to={"/drinks/create"}
             className="block rounded-md px-3 py-2  text-base font-medium"
             onClick={() => setIsMenuOpen(false)}
           >

@@ -3,9 +3,14 @@ export type Drink = {
   name: string;
   description: string;
   ingredients: Ingredient[];
-  imageUrl: string;
+  imageUrl?: string;
   alcohol: number;
-  instructionSteps: string[];
+  instructionSteps: InstructionStep[];
+};
+
+export type InstructionStep = {
+  order: number;
+  text: string;
 };
 
 export type Ingredient = {
