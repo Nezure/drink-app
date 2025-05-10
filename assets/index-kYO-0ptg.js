@@ -1,4 +1,4 @@
-import{c as n,j as e,a as c,u as f}from"./index-C87Y4BKz.js";import{u as j,Q as v,d as g}from"./drinksQueryOptions-B6EnYhT9.js";import{P as N}from"./Page-CHy14-6L.js";function y(r,s){return j(r,v)}/**
+import{c as n,j as e,a as c,u as f}from"./index-8RCPb-YK.js";import{u as j,Q as v,d as g}from"./drinksQueryOptions-wc73gODX.js";import{P as N}from"./Page-IXx9AWrt.js";function y(r,s){return j(r,v)}/**
  * @license lucide-react v0.503.0 - ISC
  *
  * This source code is licensed under the ISC license.
